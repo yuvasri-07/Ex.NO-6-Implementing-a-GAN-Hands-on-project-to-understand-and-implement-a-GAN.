@@ -1,7 +1,9 @@
 # Ex.NO-6-Implementing-a-GAN-Hands-on-project-to-understand-and-implement-a-GAN.
-## Aim :To Understand and implement a GAN
+## Aim :
+To Understand and implement a GAN.
 Generative Adversarial Network (GAN)
 Generative Adversarial Networks (GAN) can generate realistic images by learning from existing image datasets. Here we will be implementing a GAN trained on the CIFAR-10 dataset using PyTorch.
+
 ## Procedure:
 Step 1: Importing Required Libraries
 import torch
@@ -12,11 +14,13 @@ import datasets, transforms
 import matplotlib.pyplot as plt
 import numpy as np
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
 Step 2: Defining Image Transformations
 Use PyTorch’s transforms to convert images to tensors and normalize pixel values between -1 and 1 for better training stability.
 transform = transforms.Compose([
 transforms.ToTensor(),
 transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
+
 Step 3: Loading the CIFAR-10 Dataset
 Download and load the CIFAR-10 dataset with defined transformations. Use a DataLoader to process the dataset in mini-batches of size 32 and shuffle the data
 
@@ -65,6 +69,7 @@ class Generator(nn.Module):
     def forward(self, z):
         img = self.model(z)
         return img
+
 Step 6: Building the Discriminator
 Create a binary classifier network that distinguishes real from fake images. Use convolutional layers, batch normalization, dropout, LeakyReLU activation and a Sigmoid output layer to give a probability between 0 and 1.
 •	nn.Conv2d(32, 64, kernel_size=3, stride=2, padding=1): Second convolutional layer increasing channels to 64, downsampling further.
@@ -98,6 +103,7 @@ class Discriminator(nn.Module):
     def forward(self, img):
         validity = self.model(img)
         return validity
+
 Step 7: Initializing GAN Components
 •	Generator and Discriminator are initialized on the available device (GPU or CPU).
 •	Binary Cross-Entropy (BCE) Loss is chosen as the loss function.
@@ -164,8 +170,14 @@ if (i + 1) % 100 == 0:
             plt.axis("off")
             plt.show()
 
-    
+## Output:
+
+<img width="481" height="504" alt="WhatsApp Image 2026-10-31 at 8 29 18 AM" src="https://github.com/user-attachments/assets/403f5a36-213b-4fff-a50f-e5092e36ca71" />
 
 
-## Conclusion:
+## Google Collab:
+
+https://colab.research.google.com/drive/1_gLUp1Rc0L0qYZn4qIphLhczScHbaEFs#scrollTo=jTE9yq3jI0V3
+
+## Result:
 Thus successfully implemented and trained a GAN that learns to generate realistic CIFAR-10 images through adversarial training.
